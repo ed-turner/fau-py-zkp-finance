@@ -8,7 +8,6 @@ def prove_password(password: str, challenge: str) -> Proof:
     """
     This function will take a password and generates a proof of knowledge
     of the password without revealing the password itself
-
     :param password: The password
     :param challenge: The challenge
     :return: The proof
