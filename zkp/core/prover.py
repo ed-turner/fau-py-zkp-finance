@@ -1,26 +1,26 @@
-from cryptography.fernet import MultiFernet
+import hashlib
 import random
 
 from .data.models import Proof
 
 
-def prove_password(password: str, challenge: str, encryptor: MultiFernet) -> Proof:
+def prove_password(password: str, challenge: str) -> Proof:
     """
     This function will take a password and generates a proof of knowledge
     of the password without revealing the password itself
 
     :param password: The password
     :param challenge: The challenge
-    :param encryptor: The encryption algorithm
     :return: The proof
     """
     # Hash the password
-    hashed_password = encryptor.encrypt(password.encode('utf-8')).decode()
+    hashed_password = hashlib.sha1(password).hexdigest()
 
     # Generate a random salt and hash the salted password
     salt = str(random.randint(1, 1000000))
     salted_password = hashed_password + salt
-    hashed_salted_password = encryptor.encrypt(salted_password.encode('utf-8')).decode()
+
+    hashed_salted_password = hashlib.sha1(salted_password.encode('utf-8')).hexdigest()
 
     # Generate a random number
     r = random.randint(1, 1000000)

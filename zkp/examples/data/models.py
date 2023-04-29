@@ -25,10 +25,3 @@ class TransactionModel(BaseModel):
     sink_account_transaction: AccountTransaction
     transaction_date: datetime = Field(default_factory=datetime.utcnow)
 
-    @validator('sink_account_transaction')
-    def passwords_match(cls, v, values, **kwargs):
-        if 'source_account_transaction' in values:
-            assert values['source_account_transaction'].type != v['sink_account_transaction'], \
-                "The source and sink account transaction types are the same"
-
-        return v
