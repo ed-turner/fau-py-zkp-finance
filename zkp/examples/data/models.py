@@ -3,7 +3,7 @@ This is just to discover the data models and their expected schema
 """
 from typing import Literal, Optional
 from datetime import datetime
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field
 
 
 class AccountInformation(BaseModel):
